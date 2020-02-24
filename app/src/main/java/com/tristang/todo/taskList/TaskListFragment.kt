@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tristang.todo.R
 import kotlinx.android.synthetic.main.fragment_task_list.*
+import kotlinx.android.synthetic.main.item_task.*
 import java.util.*
 
 
@@ -31,9 +32,17 @@ class TaskListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycle_view.adapter = TaskListAdapter(taskList)
         recycle_view.layoutManager = LinearLayoutManager(activity)
+        var adapter: TaskListAdapter = recycle_view.adapter as TaskListAdapter
+
+
         addButton.setOnClickListener{
             taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}"))
             recycle_view.adapter!!.notifyDataSetChanged()
+        }
+
+        adapter.onDeleteClickListener = {
+            taskList.remove(it)
+            adapter.notifyDataSetChanged()
         }
     }
 
