@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tristang.todo.R
 import kotlinx.android.synthetic.main.item_task.view.*
 
-class TaskListAdapter(private val taskList: List<String>) : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
+class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -16,8 +16,11 @@ class TaskListAdapter(private val taskList: List<String>) : RecyclerView.Adapter
     }
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(taskTitle: String) {
-            itemView.task_title.text = taskTitle
+        fun bind(taskTitle: Task) {
+//            itemView.task_title.text = taskTitle.title + "\n" + taskTitle.description
+            itemView.task_title.text = taskTitle.title
+            itemView.task_description.text = taskTitle.description
+
         }
     }
 
