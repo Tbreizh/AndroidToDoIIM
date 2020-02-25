@@ -1,4 +1,5 @@
 package com.tristang.todo.taskList
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tristang.todo.R
+import com.tristang.todo.task.TaskActivity
 import kotlinx.android.synthetic.main.fragment_task_list.*
 import kotlinx.android.synthetic.main.item_task.*
 import java.util.*
@@ -36,14 +38,29 @@ class TaskListFragment : Fragment() {
 
 
         addButton.setOnClickListener{
-            taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}"))
-            recycle_view.adapter!!.notifyDataSetChanged()
+//            taskList.add(Task(id = UUID.randomUUID().toString(), title = "Task ${taskList.size + 1}"))
+//            recycle_view.adapter!!.notifyDataSetChanged()
+            val intent = Intent(context, TaskActivity::class.java)
+            startActivityForResult(intent, ADD_TASK_REQUEST_CODE)
         }
+
 
         adapter.onDeleteClickListener = {
             taskList.remove(it)
             adapter.notifyDataSetChanged()
         }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val task = data!!.getSerializableExtra(TaskActivity.TASK_KEY) as Task
+        this.taskList.add(task)
+        recycle_view.adapter?.notifyDataSetChanged()
+    }
+
+    companion object {
+        const val ADD_TASK_REQUEST_CODE = 2
     }
 
 }

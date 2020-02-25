@@ -4,15 +4,15 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/add_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@android:string/VideoView_error_title"
+        android:hint="Title"
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/add_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -20,7 +20,7 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/add_task_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Task" />
