@@ -2,4 +2,5 @@
     <string name="app_name">ToDoTristanG</string>
     <string name="remove">delete</string>
     <string name="Edit">edit</string>
+    <string name="textviewtop">TextViewtop</string>
 </resources>
