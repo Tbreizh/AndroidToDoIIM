@@ -31,10 +31,19 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/removeButton"
+        android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/Edit"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageButton
+        android:id="@+id/removeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
         android:background="@android:color/transparent"
         android:contentDescription="@string/remove"
         app:srcCompat="@android:drawable/ic_delete" />

@@ -1,6 +1,7 @@
 package com.tristang.todo.taskList
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,17 +51,35 @@ class TaskListFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+        adapter.onEditClickListener = {
+            val intent = Intent(context, TaskActivity::class.java)
+            intent.putExtra("Title", it.title)
+            intent.putExtra("Description", it.description)
+            intent.putExtra("Id", it.id)
+            startActivityForResult(intent, EDIT_TASK_REQUEST_CODE)
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val task = data!!.getSerializableExtra(TaskActivity.TASK_KEY) as Task
-        this.taskList.add(task)
+        if (requestCode == ADD_TASK_REQUEST_CODE){
+            val task = data!!.getSerializableExtra(TaskActivity.TASK_KEY) as Task
+            this.taskList.add(task)
+            Log.d("TEST", "yoyoy")
+        }
+        if (requestCode == EDIT_TASK_REQUEST_CODE){
+            val task = data!!.getSerializableExtra(TaskActivity.TASK_KEY) as Task
+            val index = this.taskList.indexOfFirst { it.id == task.id }
+            taskList[index] = task
+        }
+
         recycle_view.adapter?.notifyDataSetChanged()
     }
 
     companion object {
         const val ADD_TASK_REQUEST_CODE = 2
+        const val EDIT_TASK_REQUEST_CODE = 3
     }
 
 }

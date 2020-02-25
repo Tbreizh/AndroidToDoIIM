@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.item_task.view.*
 class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
     var onDeleteClickListener: ((Task) -> Unit)? = null
+    var onEditClickListener: ((Task) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
@@ -23,6 +24,9 @@ class TaskListAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
             itemView.task_description.text = taskTitle.description
             itemView.removeButton.setOnClickListener{
                 onDeleteClickListener?.invoke(taskTitle)
+            }
+            itemView.editButton.setOnClickListener{
+                onEditClickListener?.invoke(taskTitle)
             }
         }
     }
